@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    :root {
+      /*定义了两个CSS变量，以--来开头*/
+      --main-bg: #fff;
+      --main-clor: #000;
+    }
+    .panel {
+      font-size: 1rem;
+      padding: 1em;
+      border: 1px solid #999;
+      border-radius: 0.5em;
+      background-color: var(--main-bg);
+      color: var(--main-clor);
+    }
+    .panel > h2 {
+      margin-top: 0;
+      font-size: .8em;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .dark {
+      margin-top: 2em;
+      padding: 1em;
+      background-color: #999;
+      /*在容器内，重写了全局定义的两个变量值*/
+      --main-bg: #333;
+      --main-clor: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h2>Single-origin</h2>
+    <div class="body">
+      We have built partnerships with small farms
+      around the world to hand-select beans at the
+      peak of season. We then carefully roast in
+      small batches to maximize their potential.
+    </div>
+  </div>
+
+  <aside class="dark">
+    <div class="panel">
+      <h2>Single-origin</h2>
+      <div class="body">
+        We have built partnerships with small farms
+        around the world to hand-select beans at the
+        peak of season. We then carefully roast in
+        small batches to maximize their potential.
+      </div>
+    </div>
+  </aside>
+</body>
+</html>
