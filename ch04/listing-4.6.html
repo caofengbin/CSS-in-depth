@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>清除浮动2:使用伪类</title>
+  <style>
+    /* 设置全局的border-box*/
+    :root {
+      box-sizing: border-box;
+    }
+    *,
+    ::before,
+    ::after {
+      box-sizing: inherit;
+    }
+
+    body {
+      background-color: #eee;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* 猫头鹰选择器用于设置全局的外边距 */
+    * + * {
+      margin-top: 1.5em;
+    }
+
+    header {
+      padding: 1em 1.5em;
+      color: #fff;
+      background-color: #0072b0;
+      border-radius: .5em;
+      margin-bottom: 1.5em;
+    }
+
+    /* 内层的小容器 */
+    .main {
+      padding: 0 1.5em;
+      background-color: #fff;
+      border-radius: .5em;
+    }
+
+    /* 外层的大容器 */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    
+    .media {
+      float: left;
+      width: 50%;
+      padding: 1.5em;
+      background-color: #eee;
+      border-radius: 0.5em;
+    }
+
+    /* 使用伪类来清除浮动，这里的 .clearfix 用于选中整体的外层容器，在它的最后插入内容*/
+    .clearfix::after {
+      display: block;
+      content: " ";
+      clear: both;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Franklin Running clud</h1>
+    </header>
+    <main class="main clearfix">
+      <h2>Running tips</h2>
+
+      <div class="media">
+        <img class="media-iamge" src="runner.png">
+        <div class="media-body">
+          <h4>Strength</h4>
+          <p>
+            Strength training is an important part of
+            injury prevention. Focus on your core&mdash;
+            especially your abs and glutes.
+          </p>
+        </div>
+      </div>
+
+      <div class="media">
+        <img class="media-iamge" src="runner.png">
+        <div class="media-body">
+          <h4>Strength</h4>
+          <p>
+            Strength training is an important part of
+            injury prevention. Focus on your core&mdash;
+            especially your abs and glutes.
+          </p>
+        </div>
+      </div>
+
+      <div class="media">
+        <img class="media-iamge" src="runner.png">
+        <div class="media-body">
+          <h4>Strength</h4>
+          <p>
+            Strength training is an important part of
+            injury prevention. Focus on your core&mdash;
+            especially your abs and glutes.
+          </p>
+        </div>
+      </div>
+
+      <div class="media">
+        <img class="media-iamge" src="runner.png">
+        <div class="media-body">
+          <h4>Strength</h4>
+          <p>
+            Strength training is an important part of
+            injury prevention. Focus on your core&mdash;
+            especially your abs and glutes.
+          </p>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
