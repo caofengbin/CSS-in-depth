@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>引入网格系统1</title>
+  <style>
+    /* 设置全局的border-box*/
+    :root {
+      box-sizing: border-box;
+    }
+    *,
+    ::before,
+    ::after {
+      box-sizing: inherit;
+    }
+
+    body {
+      background-color: #eee;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* 猫头鹰选择器用于设置全局的外边距 */
+    * + * {
+      margin-top: 1.5em;
+    }
+
+    header {
+      padding: 1em 1.5em;
+      color: #fff;
+      background-color: #0072b0;
+      border-radius: .5em;
+      margin-bottom: 1.5em;
+    }
+
+    /* 内层的小容器 */
+    .main {
+      padding: 0 1.5em 1.5em;
+      background-color: #fff;
+      border-radius: .5em;
+    }
+
+    /* 外层的大容器 */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    
+    .media {
+      padding: 1.5em;
+      background-color: #eee;
+      border-radius: 0.5em;
+    }
+
+    /* 这里是对每一个row的最后，增加一个伪类，用来清除当前这一行的浮动*/
+    .row::after {
+      content: " ";
+      clear: both;
+      display: block;
+    }
+
+    /* 清除浮动的第二步操作，对整个容器来清除浮动*/
+    .clearfix::before,
+    .clearfix::after {
+      display: table;
+      content: " ";
+    }
+    .clearfix::after {
+      clear: both;
+    }
+
+    [class*="column-"] {
+      float: left;
+      /* 去除掉猫头鹰选择器带来的padding top影响*/
+      margin-top: 0;
+      /*制造表格元素的间隙问题*/
+      padding: 0 0.75em;
+    }
+
+    /*行内元素设置了padding，会导致最左边与最右边，存在一个不对齐的问题，因此这里通过给一行设置左右的负边距，来解决这个问题*/
+    .row {
+      margin-left: -0.75em;
+      margin-right: -0.75em;
+    }
+
+    .column-1 { width: 8.3333%; }
+    .column-2 { width: 16.6667%; }
+    .column-3 { width: 25%; }
+    .column-4 { width: 33.3333%; }
+    .column-5 { width: 41.6667%; }
+    .column-6 { width: 50%; }
+    .column-7 { width: 58.3333%; }
+    .column-8 { width: 66.6667%; }
+    .column-9 { width: 75%; }
+    .column-10 { width: 83.3333%; }
+    .column-11 { width: 91.6667% }
+    .column-12 { width: 100%; }
+
+    /* 让图片浮动脱离文档流 */
+    .media-image {
+      float: left;
+      margin-right: 1.5em;
+    }
+
+    /* 删除掉猫头鹰选择器增加个一个margin-top */
+    .media-body {
+      margin-top: 0;
+      /* 创建一个BFC，这样正文就不会和浮动的图片重合*/
+      overflow: auto;
+    }
+
+    /* 删除用户代理样式增加的：margin-top */
+    .media-body h4 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Franklin Running clud</h1>
+    </header>
+    <main class="main clearfix">
+      <h2>Running tips</h2>
+      
+      <div>
+        <div class="row">
+          <div class="column-6">
+            <div class="media">
+              <img class="media-image" src="runner.png" width="80">
+              <div class="media-body">
+                <h4>Strength 1</h4>
+                <p>
+                  Strength training is an important part of
+                    injury prevention. Focus on your core&mdash;
+                    especially your abs and glutes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="column-6">
+            <div class="media">
+              <img class="media-image" src="shoes.png" width="80">
+              <div class="media-body">
+                <h4>Cadence 2</h4>
+                <p>
+                  Check your stride turnover. The most efficient
+                    runners take about 180 steps per minute.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="column-6">
+            <div class="media">
+              <img class="media-image" src="shoes.png" width="80">
+              <div class="media-body">
+                <h4>Change it up 3</h4>
+                <p>
+                  Don't run the same every time you hit the
+                  road. Vary your pace, and vary the distance
+                  of your runs.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="column-6">
+            <div class="media">
+              <img class="media-image" src="runner.png" width="80">
+              <div class="media-body">
+                <h4>Focus on form 4</h4>
+                <p>
+                  Run tall but relaxed. Your feet should hit
+                  the ground beneath your hips, not out in
+                  front of you.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </main>
+  </div>
+</body>
+</html>
