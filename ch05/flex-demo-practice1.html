@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    :root {
+      box-sizing: border-box;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: inherit;
+    }
+
+    body {
+      background-color: #709b90;;
+      font-family: Helvetica, Arial, sans-serif;
+      margin: 0;
+    }
+    body * + * {
+      margin-top: 1.5em
+    }
+    body > .main {
+      display: flex;
+      background-color: #fff;
+      height: 100px;
+      width: 100vw;
+      align-items: stretch;
+    }
+    .item1 {
+     background-color: #cc6b5a; 
+     margin-left: 1em;
+     margin-top: 0;
+    }
+
+    .main > .item2 {
+      flex: 0, 0, 300px;
+      background-color: #cc6b5a; 
+      margin-top: 0; 
+    }
+    .main > .item3 {
+      flex: 1;
+      background-color: #cc6b5a;
+      margin-top: 0; 
+      margin-left: 1em;
+    }
+
+    .main > .item4 {
+      flex: 1;
+      background-color: #cc6b5a;
+      margin: 0 1em;
+    }
+
+    .main > .item5 {
+      flex: 50%;
+      background-color: #cc6b5a;
+    }
+
+    .main > .item6 {
+      flex: 25%;
+      background-color: #cc6b5a;
+      margin: 0 1em;
+    }
+
+  </style>
+</head>
+<body>
+  <h3>1.子元素随自身宽度扩展，不一定填满容器的宽度</h3>
+  <div class="main">
+    <div class="item1">flex:none</div>
+    <div class="item1">flex:none</div>
+    <div class="item1">flex:none</div>
+  </div>
+
+  <h3>2.第一个子元素固定宽度为300px，可以给他一个max-width防止内容撑开宽度，第二个子元素填满剩余空间</h3>
+  <div class="main">
+    <div class="item2">固定300px宽</div>
+    <div class="item3">flex:1</div>
+  </div>
+
+  <h3>3.“圣杯”布局，第一个和第三个子元素固定宽度为200px，中间的元素自动扩展填充满剩余空间</h3>
+  <div class="main">
+    <div class="item2">固定300px宽</div>
+    <div class="item4">“圣杯”布局 flex:1</div>
+    <div class="item2">固定300px宽</div>
+  </div>
+
+  <h3>4.子元素扩展到指定的百分比宽度，可以用来构建第4章那样的网格系统</h3>
+  <div class="main">
+    <div class="item5">flex:50%</div>
+    <div class="item6">flex:25%</div>
+    <div class="item6">flex:25%</div>
+  </div>
+</body>
+</html>
