@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>固定定位fixed的使用</title>
+  <title>显示按钮位关闭的X</title>
   <style>
     body {
       font-family: Helvetica, Arial, sans-serif;
@@ -56,6 +56,29 @@
       background-color: white;
       /* 用于控制内部，高度不够时，自己展示出一个滚动条出来 */
       overflow: auto;
+    }
+
+    .modal-close {
+      /* 设置为绝对定位，那么他的边距就是相对于祖先节点中，第一个设置了postion为非static的元素来定位的*/
+      position: absolute;
+      right: 0.3em;
+      top: 0.3em;
+      padding: 0.3em;
+      cursor: pointer;
+      font-size: 2em;
+      height: 1em;
+      width: 1em;
+      text-indent: 10em;
+      overflow: hidden;
+      border: 0;
+    }
+
+    .modal-close::after {
+      position: absolute;
+      top: 0.2em;
+      left: 0.1em;
+      text-indent: 0;
+      content: "\00D7";
     }
   </style>
 </head>
