@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>引入黏性定位</title>
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      /* 指定了200vh会显示一个上下滚动的条 */
+      min-height: 200vh;
+      margin: 0;
+    }
+
+    /* 弹窗部分，一开始为none不做展示 */
+    .modal {
+      display: none;
+    }
+
+    button {
+      padding: .5em .7em;
+      border: 1px solid #8d8d8d;
+      background-color: white;
+      font-size: 1em;
+    }
+
+    .top-banner {
+      background-color: #ffd698;
+      padding: 1em 0;
+    }
+
+    .top-banner-inner {
+      width: 80%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* 整个弹窗内容的遮罩部分，通过下面的代码实现了一个全局的蒙层效果*/
+    .modal-backdrop {
+      background-color: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+    .modal-body {
+      position: fixed;
+      left: 20%;
+      right: 20%;
+      top: 3em;
+      bottom: 3em;
+      padding: 2em 3em;
+      background-color: white;
+      /* 用于控制内部，高度不够时，自己展示出一个滚动条出来 */
+      overflow: auto;
+      z-index: 2;
+    }
+
+    .modal-close {
+      /* 设置为绝对定位，那么他的边距就是相对于祖先节点中，第一个设置了postion为非static的元素来定位的*/
+      position: absolute;
+      right: 0.3em;
+      top: 0.3em;
+      padding: 0.3em;
+      cursor: pointer;
+      font-size: 2em;
+      /* 这个属性是用来指定文字的首行缩进的位置,这里指定了10，就会被撑出去很远，出现滚动条，然后通过overflow: hidden;把溢出的部分给隐藏掉 */
+      text-indent: 10em;
+      overflow: hidden;
+      height: 1em;
+      width: 1em;
+      border: 0;
+    }
+
+    /* 通过伪元素的方式，再显示出来一个X的关闭按钮*/
+    .modal-close::after {
+      position: absolute;
+      top: 0.1em;
+      left: 0.1em;
+      text-indent: 0;
+      content: "\00D7";
+    }
+
+    .container {
+      width: 80%;
+      max-width: 1000px;
+      margin: 1em auto;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .col-main {
+      flex: 1 80%;
+    }
+
+    .col-sidebar {
+      flex: 20%;
+    }
+
+    .affix {
+      position: sticky;
+      top: 1em;
+    }
+    .dropdown {
+      display: inline-block;
+      position: relative;
+    }
+
+    .dropdown-label {
+      background-color: #eee;
+      /* 把右边的间距放大，流出空白的出来给小三角箭头用 */
+      padding: 0.5em 2em 0.5em 1.5em;
+      border: 1px solid #ccc;
+    }
+
+    .dropdown-label::after {
+      content: "";
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      border: 0.3em solid;
+      border-color: black transparent transparent transparent;
+    }
+
+    /* 鼠标悬停时，让箭头往上展示 */
+    .dropdown:hover .dropdown-label::after {
+      top: 0.7em;
+      border-color: transparent transparent black transparent;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 2.1em;
+      min-width: 100%;
+      background-color: #eee;
+      z-index: 1;
+    }
+
+    /* 通过伪类来控制，当鼠标悬浮到指定的区域时，展示出下拉框来*/
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .submenu {
+      padding-left: 0;
+      margin: 0;
+      list-style-type: none;
+      border: 1px solid #999;
+    }
+
+    .submenu > li + li {
+      border-top: 1px solid #999;
+    }
+    .submenu > li > a {
+      display: block;
+      padding: 0.5em 1em;
+      background-color: #eee;
+      color: #369;
+      text-decoration: none;
+    }
+
+    /* 鼠标放上去时，展示一个特定的效果*/
+    .submenu > li > a:hover {
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header class="top-banner">
+    <div class="top-banner-inner">
+      <p>Find out what's going on at Wombat Coffee each
+        month. Sign up for our newsletter:
+        <button id="open">登录</button>
+      </p>
+    </div>
+  </header>
+
+  <!-- 下面是整个的弹窗浮层相关内容 -->
+  <div class="modal" id="modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-body">
+      <button class="modal-close" id="close">close</button>
+      <h2>Wombat Newsletter</h2>
+      <p>Sign up for our monthly newsletter. No spam.
+         We promise!</p>
+      <form>
+        <p>
+          <label for="email">Email address:</label>
+          <input type="text" name="email"/>
+        </p>
+        <p><button type="submit">Submit</button></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="container">
+    <main class="col-main">
+      <nav>
+        <div class="dropdown">
+          <div class="dropdown-label">Main Menu</div>
+          <div class="dropdown-menu">
+            <ul class="submenu">
+              <li><a href="/">Home</a></li>
+              <li><a href="/coffees">Coffees</a></li>
+              <li><a href="/brewers">Brewers</a></li>
+              <li><a href="/specials">Specials</a></li>
+              <li><a href="/about">About us</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <h1>Wombat Coffee Roasters</h1>
+    </main>
+
+    <aside class="col-sidebar">
+      <div class="affix">
+        <ul class="submenu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/coffees">Coffees</a></li>
+          <li><a href="/brewers">Brewers</a></li>
+          <li><a href="/specials">Specials</a></li>
+          <li><a href="/about">About us</a></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+
+  <script type="text/javascript">
+    var button = document.getElementById('open');
+    var close = document.getElementById('close');
+    var modal = document.getElementById('modal');
+
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
+      modal.style.display = 'block';
+    });
+
+    close.addEventListener('click', function(event) {
+      event.preventDefault();
+      modal.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
