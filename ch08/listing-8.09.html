@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中等屏幕适配</title>
+  <style>
+    :root {
+      box-sizing: border-box;
+      /* 基础字号，根据视口的大小会进行缩放 */
+      font-size: calc(1vw + 0.6em);
+    }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    /*
+     * a:link 是 CSS 中的伪类选择器，用于“选择未被访问过的链接”（即默认状态下的链接）。
+     */
+     a:link {
+      color: #1476b8;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    a:visited {
+      color: #1430b8;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    a:active {
+      color: #b81414;
+    }
+
+    /* 网页头部和标题部分相关的样式内容 */
+    .page-header {
+      padding: 0.4em 1em;
+      background-color: #fff;
+    }
+    /* 中等屏幕下增加头部的间距 */
+    @media (min-width: 35em) {
+      .page-header {
+        padding: 1em;
+      }
+    }
+    .title > h1 {
+      color: #333;
+      text-transform: uppercase;
+      font-size: 1.5em;
+      margin: .2em 0;
+    }
+    @media (min-width: 35em) {
+      /* 命中视口宽度>35em以上的断点，会给标题设置更大的字号 */
+      .title > h1 {
+        font-size: 2.25em;
+      }
+    }
+    .slogan {
+      color: #888;
+      font-size: 0.875em;
+      margin: 0;
+    }
+
+    /* 网页的主背景图部分 */
+    .hero {
+      padding: 2em 1em;
+      text-align: center;
+      background-image: url(coffee-beans.jpg);
+      background-size: 100%;
+      color: #fff;
+      text-shadow: 0.1em 0.1em 0.3em #000;
+    }
+    /* 中等屏幕下增加主图的内边距和自豪 */
+    @media (min-width: 35em) {
+      .hero {
+        padding: 5em 3em;
+        font-size: 1.2em;
+      }
+    }
+    main {
+      padding: 1em;
+    }
+    @media (min-width: 35em) {
+      main {
+        padding: 2em 1em;
+      }
+    }
+    .subtitle {
+      margin-top: 1.5em;
+      margin-bottom: 1.5em;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+    }
+
+    /* 实现移动端的下拉框效果 */
+    .menu {
+      position: relative;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      top: -1.2em;
+      right: 0.1em;
+
+      /* 覆盖掉之前的用户代理样式 */
+      border: 0;
+      background-color: transparent;
+      font-size: 3em;
+      width: 1em;
+      height: 1em;
+      line-height: 0.4;
+      text-indent: 5em;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .menu-toggle::after {
+      content: "\2261";
+      text-indent: 0;
+      position: absolute;
+      top: 0.2em;
+      left: 0.2em;
+      display: block;
+    }
+    .menu-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      left: 0;
+      margin: 0;
+    }
+    /* 这里是一个新增加的技巧，当给菜单.menu 同时增加上一个类.is-open时，再显示下拉框出来*/ 
+    .menu.is-open .menu-dropdown {
+      display: block;
+    }
+
+    .nav-menu {
+      margin: 0;
+      padding-left: 0;
+      border: 1px solid #ccc;
+      list-style: none;
+      background-color: #000;
+      color: #fff;
+    }
+    /* 给每个菜单元素增加个边框*/
+    .nav-menu li + li {
+      border-top: 1px solid #ccc;
+    }
+    /* 给每个菜单元素撑开大一点，视觉上好看些 */
+    .nav-menu li > a {
+      display: block;
+      padding: 0.8em 1em;
+      color: #fff;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <header id="header" class="page-header">
+    <div class="title">
+      <h1>Wombat Coffee Roasters</h1>
+      <div class="slogan">We love coffee</div>
+    </div>
+  </header>
+
+  <nav class="menu" id="main-menu">
+    <!-- 移动版本增加的面包屑功能-->
+    <button class="menu-toggle" id="toggle-menu">
+      toggle menu
+    </button>
+    <!-- 移动版本上，默认会隐藏掉-->
+    <div class="menu-dropdown">
+      <ul class="nav-menu">
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/shop.html">Shop</a></li>
+        <li><a href="/menu.html">Menu</a></li>
+        <li><a href="/brew.html">Brew</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <aside id="hero" class="hero">
+    Welcome to Wombat Coffee Roasters! We are
+    passionate about our craft, striving to bring you
+    the best hand-crafted coffee in the city.
+  </aside>
+
+  <!-- 中等屏幕，大屏幕上展示的列-->
+  <main id="main">
+    <div class="row">
+      <section class="column">
+        <h2 class="subtitle">Single-origin</h2>
+        <p>We have built partnerships with small farms
+          around the world to hand-select beans at the
+          peak of season. We then carefully roast in
+          <a href="/batch-size.html">small batches</a>
+          to maximize their potential.</p>
+      </section>
+      <section class="column">
+        <h2 class="subtitle">Blends</h2>
+        <p>Our tasters have put together a selection of
+          carefully balanced blends. Our famous
+          <a href="/house-blend.html">house blend</a>
+          is available year round.</p>
+      </section>
+      <section class="column">
+        <h2 class="subtitle">Brewing Equipment</h2>
+        <p>We offer our favorite kettles, French
+          presses, and pour-over cones. Come to one of
+          our <a href="/classes.html">brewing
+          classes</a> to learn how to brew the perfect
+          pour-over cup.</p>
+      </section>
+    </div>
+  </main>
+
+  <script type="text/javascript">
+    (function() {
+      var button = document.getElementById('toggle-menu');
+      button.addEventListener('click', function(event) {
+        // preventDefault 用于阻止事件的默认行为。
+        // 当事件被触发时，浏览器通常会执行与该事件相关的默认操作。例如，当点击一个链接时，浏览器会跳转到链接的目标页面。
+        // 但是，通过调用 event.preventDefault() 方法，你可以阻止这种默认行为的发生。
+        event.preventDefault();
+        var menu = document.getElementById('main-menu');
+        // 关于toggle方法，检查元素是否已经具有指定的类名，如果有，则移除该类名；如果没有，则添加该类名。
+        menu.classList.toggle('is-open');
+      });
+    })();
+  </script>
+</body>
+</html>
