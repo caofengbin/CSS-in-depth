@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+   .button {
+      padding: 0.8em;
+      border: 0;
+      font-size: 1rem;
+      color: white;
+      border-radius: 0.5em;
+      background-color: #57b;
+      /* 给整体的盒子增加一个阴影的效果 */
+      box-shadow: 0 0.4em #148;
+      text-shadow: 1px 1px #148;;
+   }
+   .button:active {
+      background-color: #456ab5;
+      /* 点击时，按钮往下移动*/
+      transform: translateY(0.1em);
+      /* 注意这里修改了盒子的阴影，因为整体会往下偏移0.1em，如果不修改，则会导致整体的盒子都往下移动，这样的修改保证了阴影部分不变化 */ 
+      box-shadow: 0 0.3em #148;
+    }
+    .button:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <button class="button">Sign up now</button>
+</body>
+</html>
