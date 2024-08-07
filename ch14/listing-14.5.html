@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阶跃函数实现动画效果</title>
+  <style>
+    .container {
+      position: relative;
+      height: 30px;
+    }
+    .box {
+      position: absolute;
+      /* 一开始时，定位到最左侧 */
+      left: 0;
+      height: 30px;
+      width: 30px;
+      background-color: hsl(130, 50%, 50%);
+      /* 设置一下过渡的动画效果 */
+      transition: all 1s steps(3);
+    }
+
+    .container:hover .box {
+      /* 鼠标悬停时，向右移动400px */
+      left: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box"></div>
+  </div>
+</body>
+</html>
