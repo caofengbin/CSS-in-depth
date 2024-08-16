@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学习简单的旋转动画</title>
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit;
+    }
+    body {
+      background-color: hsl(210, 80%, 20%);
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    img {
+      max-width: 100%;
+    }
+    .card {
+      padding: 0.5em;
+      /* 使卡片居中显示*/
+      margin: 0 auto;
+      background: white;
+      max-width: 300px;
+      /* 旋转的效果 */
+      /* transform: rotate(15deg); */
+      /* 倾斜的效果 */
+      /* transform: skew(20deg); */
+      /* 缩小的效果 */
+      /* transform: scale(0.8); */
+      /* 缩小的效果 */
+      transform: translate(20px, 20px)
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- alt 属性是alternative的简写，用于在图片加载失败时提供一个占位的文字显示内容 -->
+    <!-- 不做什么操作时，img的大小就是原始的图片的宽度和高度 -->
+    <img src="./images/chicken1.jpg" alt="chickens">
+    <h4>Mrs. Featherstone</h4>
+    <p> She may be a bit frumpy, but Mrs Featherstone gets the job done. She lays her largish cream-colored eggs on a daily basis. She is gregarious to a fault.</p>
+    <p>This Austra White is our most prolific producer.</p>
+  </div>
+</body>
+</html>
