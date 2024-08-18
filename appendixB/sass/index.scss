@@ -1,0 +1,14 @@
+/* B.2 */
+/* 定义变量 */
+$brand-clor: #0086b3;
+
+a:link {
+  /* 使用变量 */
+  color: $brand-clor;
+}
+
+.page-heading {
+  font-size: 1.6rem;
+  /* 使用变量 */
+  color: $brand-clor;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "appendixb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "node-sass": "^9.0.0"
+  },
+  "scripts": {
+    "sass": "sass sass/index.scss build/styles.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
